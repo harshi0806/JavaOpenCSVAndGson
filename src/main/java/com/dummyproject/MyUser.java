@@ -2,38 +2,19 @@ package com.dummyproject;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class CSVUser {
-    @CsvBindByName
+public class MyUser {
+
+    @CsvBindByName(column = "name")
     private String name;
 
-    @CsvBindByName(column = "email")
+    @CsvBindByName(column = "email", required = true)
     private String email;
 
-    @CsvBindByName(column = "phone")
+    @CsvBindByName(column = "phoneNo")
     private String phoneNo;
 
-    @CsvBindByName
+    @CsvBindByName(column = "country")
     private String country;
-
-    public CSVUser() {
-    }
-
-    public CSVUser(String name, String email, String phoneNo, String country) {
-        this.name = name;
-        this.email = email;
-        this.phoneNo = phoneNo;
-        this.country = country;
-    }
-
-    @Override
-    public String toString() {
-        return "CSVUser{" +
-                "name ='" + name + '\'' +
-                ",email ='" + email + '\'' +
-                ",phoneNo ='" + phoneNo + '\'' +
-                ",country ='" + country + '\'' +
-                '}';
-    }
     public String getName() {
         return name;
     }
@@ -56,6 +37,22 @@ public class CSVUser {
         return country;
     }
     public void setCountry(String country) {
+        this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return "MyUser{" +
+                "name ='" + name + '\'' +
+                ",email ='" + email + '\'' +
+                ",phoneNo ='" + phoneNo + '\'' +
+                ",country ='" + country + '\'' +
+                '}';
+    }
+    public MyUser(String name, String email, String phoneNo, String country) {
+        this.name = name;
+        this.email = email;
+        this.phoneNo = phoneNo;
         this.country = country;
     }
 }

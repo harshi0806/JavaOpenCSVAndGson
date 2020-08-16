@@ -15,9 +15,10 @@ public class OpenCSVAndGsonTester {
     private static final String SAMPLE_JSON_FILE_PATH = "./src/main/resources/users.json";
 
     public static void main(String[] args) {
-        try {
+        try (
             Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
             CsvtoBean<CSVUser> csvtoBean = new csvToBeanBuilder.build(reader);
+        ) {
             List<CSVUser> csvUsers = csvtoBean.parse();
             Gson gson = new Gson();
             String json = gson.toJson(csvUsers);

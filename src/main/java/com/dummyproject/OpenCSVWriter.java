@@ -19,9 +19,10 @@ public class OpenCSVWriter {
     public static void main(String[] args )throws IOException,
             CsvDataTypeMismatchException,
             CsvRequiredFieldEmpltyException {
-        try {
+        try (
             Writer writer = Files.newBufferedWriter(Paths.get(STRING_ARRAY_SAMPLE));
-            StatefulBeanToCsv<MyUser> beanToCsv = new StatefulBeanToCsvBuilder(writer)
+        ) {
+        StatefulBeanToCsv<MyUser> beanToCsv = new StatefulBeanToCsvBuilder(writer)
                     .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
                     .build();
             List<MyUser> myUsers = new ArrayList<>();
@@ -29,8 +30,6 @@ public class OpenCSVWriter {
             myUsers.add(new MyUser("Satya Nadella", "satya.nadella@outlook.com", "+1-111111111", "United States"));
 
             beanToCsv.write(myUsers);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
