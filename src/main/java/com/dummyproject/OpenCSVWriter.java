@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OpenCSVWriter {
-    private static final String OBJECT_LIST_SAMPLE = "./object-list-sample.csv";
+    private static final String OBJECT_LIST_SAMPLE = "src\\main\\resources\\outputCSV.csv";
 
     public static void main(String[] args )throws IOException,
             CsvDataTypeMismatchException,
-            CsvRequiredFieldEmpltyException {
+            CsvRequiredFieldEmptyException {
         try (
-            Writer writer = Files.newBufferedWriter(Paths.get(STRING_ARRAY_SAMPLE));
+            Writer writer = Files.newBufferedWriter(Paths.get(OBJECT_LIST_SAMPLE));
         ) {
         StatefulBeanToCsv<MyUser> beanToCsv = new StatefulBeanToCsvBuilder(writer)
                     .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)

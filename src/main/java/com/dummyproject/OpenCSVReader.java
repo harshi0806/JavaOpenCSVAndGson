@@ -1,6 +1,6 @@
 package com.dummyproject;
-
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -9,14 +9,14 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class OpenCSVReader {
-    private static final String SAMPLE_CSV_FILE_PATH = "./users.csv";
+    private static final String SAMPLE_CSV_FILE_PATH = "outputCSV.csv";
 
     public static void main(String[] args){
 
-        try {
+        try (
             Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
-            CSVReader csvReader = new CSVReader(reader);
-
+            CSVReader csvReader = new CSVReader(reader)
+        ) {
             //Reading All Records At Once Into List
             List<String[]> records = csvReader.readAll();
             for (String[] record : records) {
@@ -24,8 +24,9 @@ public class OpenCSVReader {
                 System.out.println("Email : " + record[1]);
                 System.out.println("Phone : " + record[2]);
                 System.out.println("Country : " + record[3]);
+                System.out.println("---------------------------");
             }
-        } catch (IOException e) {
+        } catch (IOException | CsvException e) {
             e.printStackTrace();
         }
     }
